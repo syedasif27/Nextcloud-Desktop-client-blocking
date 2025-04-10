@@ -1,10 +1,12 @@
-# nextcloud-mirall-mobile-blocking
-virtual host config for blocking the desktop client and mobile client
+# Nextcloud desktop client blocking 
 
-First of all you have to check whether you are using httpd or apache2 or nginx
+To prevent desktop client from accessing Nextcloud, the following configuration will be added to the virtual host file of apache (/etc/httpd/conf.d/"your-conf-file".conf) or (/etc/apache2/sites-available/"your-config-file".conf)
 
-for apache2 
+        RewriteEngine On
+        RewriteCond %{HTTP_USER_AGENT} "mirall" [NC]
+        RewriteRule ^ - [F,L]
+ 
+ # Web access will remain unaffected
 
-Location of the apache config
 
-**  /etc/apache2/conf.d/sites-available/nextcloud.conf 
+
